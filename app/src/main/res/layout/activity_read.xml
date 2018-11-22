@@ -67,11 +67,6 @@
                         android:layout_alignParentRight="true"
                         android:text="@string/nb.read.brief"/>
 
-                    <TextView
-                        android:id="@+id/read_tv_community"
-                        style="@style/NB.Theme.TextAppearance.Read.TopMenu"
-                        android:layout_toLeftOf="@id/read_tv_brief"
-                        android:text="@string/nb.read.community"/>
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>

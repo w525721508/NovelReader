@@ -90,8 +90,6 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
     /*************top_menu_view*******************/
     @BindView(R.id.read_abl_top_menu)
     AppBarLayout mAblTopMenu;
-    @BindView(R.id.read_tv_community)
-    TextView mTvCommunity;
     @BindView(R.id.read_tv_brief)
     TextView mTvBrief;
     /***************content_view******************/
@@ -400,8 +398,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
                         if (mPageLoader.getPageStatus() == PageLoader.STATUS_LOADING
                                 || mPageLoader.getPageStatus() == PageLoader.STATUS_ERROR) {
                             mSbChapterProgress.setEnabled(false);
-                        }
-                        else {
+                        } else {
                             mSbChapterProgress.setEnabled(true);
                         }
                     }
@@ -525,12 +522,6 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
                 (v) -> BookDetailActivity.startActivity(this, mBookId)
         );
 
-        mTvCommunity.setOnClickListener(
-                (v) -> {
-                    Intent intent = new Intent(this, CommunityActivity.class);
-                    startActivity(intent);
-                }
-        );
 
         mSettingDialog.setOnDismissListener(
                 dialog -> hideSystemBar()
