@@ -2,9 +2,6 @@ package com.example.newbiechen.ireader.model.remote;
 
 import com.example.newbiechen.ireader.model.bean.BookDetailBean;
 import com.example.newbiechen.ireader.model.bean.packages.BookChapterPackage;
-import com.example.newbiechen.ireader.model.bean.packages.BookListDetailPackage;
-import com.example.newbiechen.ireader.model.bean.packages.BookListPackage;
-import com.example.newbiechen.ireader.model.bean.packages.BookTagPackage;
 import com.example.newbiechen.ireader.model.bean.packages.ChapterInfoPackage;
 import com.example.newbiechen.ireader.model.bean.packages.SearchBookPackage;
 
@@ -37,15 +34,6 @@ public interface BookApi {
      */
     @GET("http://chapter2.zhuishushenqi.com/chapter/{url}")
     Single<ChapterInfoPackage> getChapterInfoPackage(@Path("url") String url);
-
-
-    /**
-     * 获取书单详情
-     *
-     * @return
-     */
-    @GET("/book-list/{bookListId}")
-    Single<BookListDetailPackage> getBookListDetailPackage(@Path("bookListId") String bookListId);
 
 
     /*************************书籍详情**********************************/

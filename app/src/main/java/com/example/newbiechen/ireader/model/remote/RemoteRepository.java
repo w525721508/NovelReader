@@ -2,7 +2,6 @@ package com.example.newbiechen.ireader.model.remote;
 
 import com.example.newbiechen.ireader.model.bean.BookChapterBean;
 import com.example.newbiechen.ireader.model.bean.BookDetailBean;
-import com.example.newbiechen.ireader.model.bean.BookListDetailBean;
 import com.example.newbiechen.ireader.model.bean.ChapterInfoBean;
 import com.example.newbiechen.ireader.model.bean.packages.SearchBookPackage;
 
@@ -69,16 +68,6 @@ public class RemoteRepository {
     /***********************************书单*************************************/
 
 
-    /**
-     * 获取书单的详情
-     *
-     * @param detailId
-     * @return
-     */
-    public Single<BookListDetailBean> getBookListDetail(String detailId) {
-        return mBookApi.getBookListDetailPackage(detailId)
-                .map(bean -> bean.getBookList());
-    }
 
     /***************************************书籍详情**********************************************/
     public Single<BookDetailBean> getBookDetail(String bookId) {
