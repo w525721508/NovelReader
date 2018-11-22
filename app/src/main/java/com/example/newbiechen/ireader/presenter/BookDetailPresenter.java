@@ -1,7 +1,5 @@
 package com.example.newbiechen.ireader.presenter;
 
-import android.util.Log;
-
 import com.example.newbiechen.ireader.model.bean.BookChapterBean;
 import com.example.newbiechen.ireader.model.bean.BookDetailBean;
 import com.example.newbiechen.ireader.model.bean.CollBookBean;

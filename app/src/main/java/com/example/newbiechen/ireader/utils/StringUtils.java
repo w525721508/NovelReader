@@ -128,48 +128,4 @@ public class StringUtils {
         return new String(c);
     }
 
-    //繁簡轉換
-    public static String convertCC(String input, Context context) {
-//        ConversionType currentConversionType = ConversionType.S2TWP;
-//        int convertType = SharedPreUtils.getInstance().getInt(SHARED_READ_CONVERT_TYPE, 0);
-//
-//        if (input.length() == 0)
-//            return "";
-//
-//        switch (convertType) {
-//            case 1:
-//                currentConversionType = ConversionType.TW2SP;
-//                break;
-//            case 2:
-//                currentConversionType = ConversionType.S2HK;
-//                break;
-//            case 3:
-//                currentConversionType = ConversionType.S2T;
-//                break;
-//            case 4:
-//                currentConversionType = ConversionType.S2TW;
-//                break;
-//            case 5:
-//                currentConversionType = ConversionType.S2TWP;
-//                break;
-//            case 6:
-//                currentConversionType = ConversionType.T2HK;
-//                break;
-//            case 7:
-//                currentConversionType = ConversionType.T2S;
-//                break;
-//            case 8:
-//                currentConversionType = ConversionType.T2TW;
-//                break;
-//            case 9:
-//                currentConversionType = ConversionType.TW2S;
-//                break;
-//            case 10:
-//                currentConversionType = ConversionType.HK2S;
-//                break;
-//        }
-//
-//        return (convertType != 0)?ChineseConverter.convert(input, currentConversionType, context):input;
-        return input;
-    }
 }

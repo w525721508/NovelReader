@@ -12,19 +12,18 @@ import java.util.Map;
  * 已弃用，
  */
 
-public class BookManager{
+public class BookManager {
     private static final String TAG = "BookManager";
     private String chapterName;
     private String bookId;
-    private long chapterLen;
     private long position;
     private Map<String, Cache> cacheMap = new HashMap<>();
     private static volatile BookManager sInstance;
 
-    public static BookManager getInstance(){
-        if (sInstance == null){
-            synchronized (BookManager.class){
-                if (sInstance == null){
+    public static BookManager getInstance() {
+        if (sInstance == null) {
+            synchronized (BookManager.class) {
+                if (sInstance == null) {
                     sInstance = new BookManager();
                 }
             }
@@ -33,23 +32,9 @@ public class BookManager{
     }
 
 
-    public boolean openChapter(String bookId,String chapterName,long position){
-        //如果文件不存在，则打开失败
-        File file = new File(Constant.BOOK_CACHE_PATH + bookId
-                + File.separator + chapterName + FileUtils.SUFFIX_NB);
-        if (!file.exists()){
-            return false;
-        }
-        this.bookId = bookId;
-        this.chapterName = chapterName;
-        this.position = position;
-        createCache();
-        return true;
-    }
-
-    private void createCache(){
+    private void createCache() {
         //创建Cache
-        if (!cacheMap.containsKey(chapterName)){
+        if (!cacheMap.containsKey(chapterName)) {
             Cache cache = new Cache();
             File file = getBookFile(bookId, chapterName);
             //TODO:数据加载默认utf-8(以后会增加判断),FileUtils采用Reader获取数据的，可能用byte会更好一点
@@ -58,27 +43,21 @@ public class BookManager{
             cache.size = array.length;
             cache.data = charReference;
             cacheMap.put(chapterName, cache);
-
-            chapterLen = cache.size;
-        }
-        else {
-            chapterLen = cacheMap.get(chapterName).getSize();
         }
     }
 
-    public void setPosition(long position){
+    public void setPosition(long position) {
         this.position = position;
     }
 
-    public long getPosition(){
+    public long getPosition() {
         return position;
     }
 
 
-
     //获取章节的内容
     public char[] getContent() {
-        if (cacheMap.size() == 0){
+        if (cacheMap.size() == 0) {
             return new char[1];
         }
         char[] block = cacheMap.get(chapterName).getData().get();
@@ -92,19 +71,19 @@ public class BookManager{
     }
 
 
-
     /**
      * 创建或获取存储文件
+     *
      * @param folderName
      * @param fileName
      * @return
      */
-    public static File getBookFile(String folderName, String fileName){
+    public static File getBookFile(String folderName, String fileName) {
         return FileUtils.getFile(Constant.BOOK_CACHE_PATH + folderName
                 + File.separator + fileName + FileUtils.SUFFIX_NB);
     }
 
-    public static long getBookSize(String folderName){
+    public static long getBookSize(String folderName) {
         return FileUtils.getDirSize(FileUtils
                 .getFolder(Constant.BOOK_CACHE_PATH + folderName));
     }
@@ -112,11 +91,12 @@ public class BookManager{
     /**
      * 根据文件名判断是否被缓存过 (因为可能数据库显示被缓存过，但是文件中却没有的情况，所以需要根据文件判断是否被缓存
      * 过)
+     *
      * @param folderName : bookId
-     * @param fileName: chapterName
+     * @param fileName:  chapterName
      * @return
      */
-    public static boolean isChapterCached(String folderName, String fileName){
+    public static boolean isChapterCached(String folderName, String fileName) {
         File file = new File(Constant.BOOK_CACHE_PATH + folderName
                 + File.separator + fileName + FileUtils.SUFFIX_NB);
         return file.exists();

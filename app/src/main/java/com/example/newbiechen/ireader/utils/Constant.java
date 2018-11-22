@@ -28,42 +28,4 @@ public class Constant {
             + "book_cache" + File.separator;
 
 
-    //BookType
-    @StringDef({
-            BookType.ALL,
-            BookType.XHQH,
-            BookType.WXXX,
-            BookType.DSYN,
-            BookType.LSJS,
-            BookType.YXJJ,
-            BookType.KHLY,
-            BookType.CYJK,
-            BookType.HMZC,
-            BookType.XDYQ,
-            BookType.GDYQ,
-            BookType.HXYQ,
-            BookType.DMTR
-    })
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface BookType {
-        String ALL = "all";
-
-        String XHQH = "xhqh";
-
-        String WXXX = "wxxx";
-
-        String DSYN = "dsyn";
-
-        String LSJS = "lsjs";
-
-        String YXJJ = "yxjj";
-        String KHLY = "khly";
-        String CYJK = "cyjk";
-        String HMZC = "hmzc";
-        String XDYQ = "xdyq";
-        String GDYQ = "gdyq";
-        String HXYQ = "hxyq";
-        String DMTR = "dmtr";
-    }
-
 }

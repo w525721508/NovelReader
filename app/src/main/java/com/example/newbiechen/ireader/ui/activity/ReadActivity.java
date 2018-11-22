@@ -380,7 +380,7 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
                     @Override
                     public void onCategoryFinish(List<TxtChapter> chapters) {
                         for (TxtChapter chapter : chapters) {
-                            chapter.setTitle(StringUtils.convertCC(chapter.getTitle(), mPvPage.getContext()));
+                            chapter.setTitle(chapter.getTitle());
                         }
                         mCategoryAdapter.refreshItems(chapters);
                     }

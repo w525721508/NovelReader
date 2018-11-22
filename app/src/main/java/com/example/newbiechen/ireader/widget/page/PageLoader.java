@@ -756,7 +756,8 @@ public abstract class PageLoader {
         } else {
             //擦除区域
             mBgPaint.setColor(mBgColor);
-            canvas.drawRect(mDisplayWidth / 2, mDisplayHeight - mMarginHeight + ScreenUtils.dpToPx(2), mDisplayWidth, mDisplayHeight, mBgPaint);
+            canvas.drawRect(mDisplayWidth / 2, mDisplayHeight - mMarginHeight + ScreenUtils.dpToPx(2), mDisplayWidth,
+                    mDisplayHeight, mBgPaint);
         }
 
         /******绘制电池********/
@@ -1241,7 +1242,6 @@ public abstract class PageLoader {
         String paragraph = chapter.getTitle();//默认展示标题
         try {
             while (showTitle || (paragraph = br.readLine()) != null) {
-                paragraph = StringUtils.convertCC(paragraph, mContext);
                 // 重置段落
                 if (!showTitle) {
                     paragraph = paragraph.replaceAll("\\s", "");
@@ -1266,7 +1266,7 @@ public abstract class PageLoader {
                         // 创建Page
                         TxtPage page = new TxtPage();
                         page.position = pages.size();
-                        page.title = StringUtils.convertCC(chapter.getTitle(), mContext);
+                        page.title = chapter.getTitle();
                         page.lines = new ArrayList<>(lines);
                         page.titleLines = titleLinesCount;
                         pages.add(page);
@@ -1319,7 +1319,7 @@ public abstract class PageLoader {
                 //创建Page
                 TxtPage page = new TxtPage();
                 page.position = pages.size();
-                page.title = StringUtils.convertCC(chapter.getTitle(), mContext);
+                page.title = chapter.getTitle();
                 page.lines = new ArrayList<>(lines);
                 page.titleLines = titleLinesCount;
                 pages.add(page);

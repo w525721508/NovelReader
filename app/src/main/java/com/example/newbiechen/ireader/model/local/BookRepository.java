@@ -4,26 +4,20 @@ import android.util.Log;
 
 import com.example.newbiechen.ireader.model.bean.BookChapterBean;
 import com.example.newbiechen.ireader.model.bean.BookRecordBean;
-import com.example.newbiechen.ireader.model.bean.ChapterInfoBean;
 import com.example.newbiechen.ireader.model.bean.CollBookBean;
 import com.example.newbiechen.ireader.model.gen.BookChapterBeanDao;
 import com.example.newbiechen.ireader.model.gen.BookRecordBeanDao;
 import com.example.newbiechen.ireader.model.gen.CollBookBeanDao;
 import com.example.newbiechen.ireader.model.gen.DaoSession;
-import com.example.newbiechen.ireader.model.gen.DownloadTaskBeanDao;
 import com.example.newbiechen.ireader.utils.BookManager;
 import com.example.newbiechen.ireader.utils.Constant;
 import com.example.newbiechen.ireader.utils.FileUtils;
 import com.example.newbiechen.ireader.utils.IOUtils;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.Writer;
 import java.util.List;
 
@@ -133,8 +127,6 @@ public class BookRepository {
     }
 
 
-
-
     //获取书籍列表
     public Single<List<BookChapterBean>> getBookChaptersInRx(String bookId) {
         return Single.create(new SingleOnSubscribe<List<BookChapterBean>>() {
@@ -168,8 +160,6 @@ public class BookRepository {
             public void subscribe(SingleEmitter<Void> e) throws Exception {
                 //查看文本中是否存在删除的数据
                 deleteBook(bean.get_id());
-                //删除任务
-                deleteDownloadTask(bean.get_id());
                 //删除目录
                 deleteBookChapter(bean.get_id());
                 //删除CollBook
@@ -194,14 +184,5 @@ public class BookRepository {
         FileUtils.deleteFile(Constant.BOOK_CACHE_PATH + bookId);
     }
 
-
-    //删除任务
-    public void deleteDownloadTask(String bookId) {
-        mSession.getDownloadTaskBeanDao()
-                .queryBuilder()
-                .where(DownloadTaskBeanDao.Properties.BookId.eq(bookId))
-                .buildDelete()
-                .executeDeleteWithoutDetachingEntities();
-    }
 
 }

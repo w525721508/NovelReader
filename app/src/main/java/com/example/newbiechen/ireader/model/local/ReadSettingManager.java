@@ -11,13 +11,6 @@ import com.example.newbiechen.ireader.widget.page.PageStyle;
  */
 
 public class ReadSettingManager {
-    /*************实在想不出什么好记的命名方式。。******************/
-    public static final int READ_BG_DEFAULT = 0;
-    public static final int READ_BG_1 = 1;
-    public static final int READ_BG_2 = 2;
-    public static final int READ_BG_3 = 3;
-    public static final int READ_BG_4 = 4;
-    public static final int NIGHT_MODE = 5;
 
     public static final String SHARED_READ_BG = "shared_read_bg";
     public static final String SHARED_READ_BRIGHTNESS = "shared_read_brightness";
