@@ -9,7 +9,6 @@ import com.example.newbiechen.ireader.model.bean.BookHelpfulBean;
 import com.example.newbiechen.ireader.model.bean.BookHelpsBean;
 import com.example.newbiechen.ireader.model.bean.BookReviewBean;
 import com.example.newbiechen.ireader.model.bean.packages.BookSortPackage;
-import com.example.newbiechen.ireader.model.flag.BookSort;
 import com.example.newbiechen.ireader.model.gen.AuthorBeanDao;
 
 import com.example.newbiechen.ireader.model.gen.BookCommentBeanDao;
@@ -39,21 +38,22 @@ import io.reactivex.SingleOnSubscribe;
  * Created by newbiechen on 17-4-26.
  */
 
-public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
+public class LocalRepository implements SaveDbHelper, GetDbHelper, DeleteDbHelper {
     private static final String TAG = "LocalRepository";
     private static final String DISTILLATE_ALL = "normal";
     private static final String DISTILLATE_BOUTIQUES = "distillate";
 
     private static volatile LocalRepository sInstance;
     private DaoSession mSession;
-    private LocalRepository(){
+
+    private LocalRepository() {
         mSession = DaoDbHelper.getInstance().getSession();
     }
 
-    public static LocalRepository getInstance(){
-        if (sInstance == null){
-            synchronized (LocalRepository.class){
-                if (sInstance == null){
+    public static LocalRepository getInstance() {
+        if (sInstance == null) {
+            synchronized (LocalRepository.class) {
+                if (sInstance == null) {
                     sInstance = new LocalRepository();
                 }
             }
@@ -64,12 +64,13 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
     /*************************************数据存储*******************************************/
     /**
      * 存储BookComment
+     *
      * @param beans
      */
-    public void saveBookComments(List<BookCommentBean> beans){
+    public void saveBookComments(List<BookCommentBean> beans) {
         //存储Author,为了保证高效性，所以首先转换成List进行统一存储。
         List<AuthorBean> authorBeans = new ArrayList<>(beans.size());
-        for (int i=0; i<beans.size(); ++i){
+        for (int i = 0; i < beans.size(); ++i) {
             BookCommentBean commentBean = beans.get(i);
             authorBeans.add(commentBean.getAuthorBean());
         }
@@ -79,13 +80,13 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
                 .insertOrReplaceInTx(beans);
     }
 
-    public void saveBookHelps(List<BookHelpsBean> beans){
+    public void saveBookHelps(List<BookHelpsBean> beans) {
         mSession.startAsyncSession()
                 .runInTx(
-                        ()->{
+                        () -> {
                             //存储Author,为了保证高效性，所以首先转换成List进行统一存储。
                             List<AuthorBean> authorBeans = new ArrayList<>(beans.size());
-                            for (BookHelpsBean helpsBean : beans){
+                            for (BookHelpsBean helpsBean : beans) {
                                 authorBeans.add(helpsBean.getAuthorBean());
                             }
                             saveAuthors(authorBeans);
@@ -97,14 +98,14 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
 
     }
 
-    public void saveBookReviews(List<BookReviewBean> beans){
+    public void saveBookReviews(List<BookReviewBean> beans) {
         mSession.startAsyncSession()
                 .runInTx(
-                        ()->{
+                        () -> {
                             //数据转换
                             List<ReviewBookBean> bookBeans = new ArrayList<>(beans.size());
                             List<BookHelpfulBean> helpfulBeans = new ArrayList<>(beans.size());
-                            for (BookReviewBean reviewBean : beans){
+                            for (BookReviewBean reviewBean : beans) {
                                 bookBeans.add(reviewBean.getBookBean());
                                 helpfulBeans.add(reviewBean.getHelpfulBean());
                             }
@@ -117,17 +118,17 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
                 );
     }
 
-    public void saveBooks(List<ReviewBookBean> beans){
+    public void saveBooks(List<ReviewBookBean> beans) {
         mSession.getReviewBookBeanDao()
                 .insertOrReplaceInTx(beans);
     }
 
-    public void saveAuthors(List<AuthorBean> beans){
+    public void saveAuthors(List<AuthorBean> beans) {
         mSession.getAuthorBeanDao()
                 .insertOrReplaceInTx(beans);
     }
 
-    public void saveBookHelpfuls(List<BookHelpfulBean> beans){
+    public void saveBookHelpfuls(List<BookHelpfulBean> beans) {
         mSession.getBookHelpfulBeanDao()
                 .insertOrReplaceInTx(beans);
     }
@@ -136,14 +137,14 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
     public void saveBookSortPackage(BookSortPackage bean) {
         String json = new Gson().toJson(bean);
         SharedPreUtils.getInstance()
-                .putString(Constant.SHARED_SAVE_BOOK_SORT,json);
+                .putString(Constant.SHARED_SAVE_BOOK_SORT, json);
     }
 
     @Override
     public void saveBillboardPackage(BillboardPackage bean) {
         String json = new Gson().toJson(bean);
         SharedPreUtils.getInstance()
-                .putString(Constant.SHARED_SAVE_BILLBOARD,json);
+                .putString(Constant.SHARED_SAVE_BILLBOARD, json);
     }
 
     @Override
@@ -158,6 +159,7 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
 
     /**
      * 获取数据
+     *
      * @param block
      * @param sort
      * @param distillate
@@ -165,7 +167,7 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
      * @param limited
      * @return
      */
-    public Single<List<BookCommentBean>> getBookComments(String block, String sort, int start, int limited, String distillate){
+    public Single<List<BookCommentBean>> getBookComments(String block, String sort, int start, int limited, String distillate) {
 
         QueryBuilder<BookCommentBean> queryBuilder = mSession.getBookCommentBeanDao()
                 .queryBuilder()
@@ -174,19 +176,18 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
                 .offset(start)
                 .limit(limited);
 
-        queryOrderBy(queryBuilder,BookCommentBeanDao.class,sort);
+        queryOrderBy(queryBuilder, BookCommentBeanDao.class, sort);
         return queryToRx(queryBuilder);
     }
 
     /**
-     *
      * @param sort
      * @param start
      * @param limited
      * @param distillate
      * @return
      */
-    public Single<List<BookHelpsBean>> getBookHelps(String sort, int start, int limited, String distillate){
+    public Single<List<BookHelpsBean>> getBookHelps(String sort, int start, int limited, String distillate) {
         QueryBuilder<BookHelpsBean> queryBuilder = mSession.getBookHelpsBeanDao()
                 .queryBuilder()
                 .where(BookHelpsBeanDao.Properties.State.eq(distillate))
@@ -194,30 +195,25 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
                 .limit(limited);
 
 
-        queryOrderBy(queryBuilder,BookHelpsBean.class,sort);
+        queryOrderBy(queryBuilder, BookHelpsBean.class, sort);
         return queryToRx(queryBuilder);
     }
 
-    public Single<List<BookReviewBean>> getBookReviews(String sort, String bookType, int start, int limited, String distillate){
+    public Single<List<BookReviewBean>> getBookReviews(String sort, String bookType, int start, int limited, String distillate) {
         QueryBuilder<BookReviewBean> queryBuilder = mSession.getBookReviewBeanDao()
                 .queryBuilder()
                 .where(BookReviewBeanDao.Properties.State.eq(distillate))
                 .limit(limited)
                 .offset(start);
         //多表关联
-        Join bookJoin = queryBuilder.join(BookReviewBeanDao.Properties.BookId,ReviewBookBean.class)
+        Join bookJoin = queryBuilder.join(BookReviewBeanDao.Properties.BookId, ReviewBookBean.class)
                 .where(ReviewBookBeanDao.Properties.Type.eq(bookType));
 
-        queryBuilder.join(bookJoin,BookReviewBeanDao.Properties._id,
-                BookHelpfulBean.class,BookHelpsBeanDao.Properties._id);
+        queryBuilder.join(bookJoin, BookReviewBeanDao.Properties._id,
+                BookHelpfulBean.class, BookHelpsBeanDao.Properties._id);
 
         //排序
-        if (sort.equals(BookSort.HELPFUL.getDbName())){
-            queryBuilder.orderDesc(BookHelpfulBeanDao.Properties.Yes);
-        }
-        else {
-            queryOrderBy(queryBuilder,BookReviewBeanDao.class,sort);
-        }
+        queryOrderBy(queryBuilder, BookReviewBeanDao.class, sort);
 
         return queryToRx(queryBuilder);
     }
@@ -226,11 +222,10 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
     public BookSortPackage getBookSortPackage() {
         String json = SharedPreUtils.getInstance()
                 .getString(Constant.SHARED_SAVE_BOOK_SORT);
-        if (json == null){
+        if (json == null) {
             return null;
-        }
-        else {
-            return new Gson().fromJson(json,BookSortPackage.class);
+        } else {
+            return new Gson().fromJson(json, BookSortPackage.class);
         }
     }
 
@@ -238,29 +233,28 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
     public BillboardPackage getBillboardPackage() {
         String json = SharedPreUtils.getInstance()
                 .getString(Constant.SHARED_SAVE_BILLBOARD);
-        if (json == null){
+        if (json == null) {
             return null;
-        }
-        else {
-            return new Gson().fromJson(json,BillboardPackage.class);
+        } else {
+            return new Gson().fromJson(json, BillboardPackage.class);
         }
     }
 
-    public AuthorBean getAuthor(String id){
+    public AuthorBean getAuthor(String id) {
         return mSession.getAuthorBeanDao()
                 .queryBuilder()
                 .where(AuthorBeanDao.Properties._id.eq(id))
                 .unique();
     }
 
-    public ReviewBookBean getReviewBook(String id){
+    public ReviewBookBean getReviewBook(String id) {
         return mSession.getReviewBookBeanDao()
                 .queryBuilder()
                 .where(ReviewBookBeanDao.Properties._id.eq(id))
                 .unique();
     }
 
-    public BookHelpfulBean getBookHelpful(String id){
+    public BookHelpfulBean getBookHelpful(String id) {
         return mSession.getBookHelpfulBeanDao()
                 .queryBuilder()
                 .where(BookHelpfulBeanDao.Properties._id.eq(id))
@@ -273,12 +267,12 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
                 .loadAll();
     }
 
-    private <T> void queryOrderBy(QueryBuilder queryBuilder, Class<T> daoCls,String orderBy){
+    private <T> void queryOrderBy(QueryBuilder queryBuilder, Class<T> daoCls, String orderBy) {
         //获取Dao中的Properties
         Class<?>[] innerCls = daoCls.getClasses();
         Class<?> propertiesCls = null;
-        for (Class<?> cls : innerCls){
-            if (cls.getSimpleName().equals("Properties")){
+        for (Class<?> cls : innerCls) {
+            if (cls.getSimpleName().equals("Properties")) {
                 propertiesCls = cls;
                 break;
             }
@@ -300,12 +294,12 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
         }
     }
 
-    private <T> Single<List<T>> queryToRx(QueryBuilder<T> builder){
+    private <T> Single<List<T>> queryToRx(QueryBuilder<T> builder) {
         return Single.create(new SingleOnSubscribe<List<T>>() {
             @Override
             public void subscribe(SingleEmitter<List<T>> e) throws Exception {
                 List<T> data = builder.list();
-                if (data == null){
+                if (data == null) {
                     data = new ArrayList<T>(1);
                 }
                 e.onSuccess(data);
@@ -317,11 +311,11 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
     /**
      * 处理多出来的数据,一般在退出程序的时候进行
      */
-    public void disposeOverflowData(){
+    public void disposeOverflowData() {
         //固定存储100条数据，剩下的数据都删除
         mSession.startAsyncSession()
                 .runInTx(
-                        ()->{
+                        () -> {
                             disposeBookComment();
                             disposeBookHelps();
                             disposeBookReviews();
@@ -329,11 +323,11 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
                 );
     }
 
-    private void disposeBookComment(){
+    private void disposeBookComment() {
         //第一种方法:使用get获取对象之后再依次删除。
         //第二种方法:直接调用Sqlite语句进行删除
         BookCommentBeanDao commentBeanDao = mSession.getBookCommentBeanDao();
-        int count = (int)commentBeanDao.count();
+        int count = (int) commentBeanDao.count();
         List<BookCommentBean> bookCommentBeans = commentBeanDao
                 .queryBuilder()
                 .orderDesc(BookCommentBeanDao.Properties.Updated)
@@ -342,14 +336,14 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
                 .list();
         //存储Author,为了保证高效性，所以首先转换成List进行统一存储。
         List<AuthorBean> authorBeans = new ArrayList<>(bookCommentBeans.size());
-        for (BookCommentBean commentBean : bookCommentBeans){
+        for (BookCommentBean commentBean : bookCommentBeans) {
             authorBeans.add(commentBean.getAuthorBean());
         }
         deleteAuthors(authorBeans);
         deleteBookComments(bookCommentBeans);
     }
 
-    private void disposeBookHelps(){
+    private void disposeBookHelps() {
         BookHelpsBeanDao helpfulDao = mSession.getBookHelpsBeanDao();
         int count = (int) helpfulDao.count();
         List<BookHelpsBean> helpsBeans = helpfulDao
@@ -359,14 +353,14 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
                 .offset(100)
                 .list();
         List<AuthorBean> authorBeans = new ArrayList<>(helpsBeans.size());
-        for (BookHelpsBean commentBean : helpsBeans){
+        for (BookHelpsBean commentBean : helpsBeans) {
             authorBeans.add(commentBean.getAuthorBean());
         }
         deleteAuthors(authorBeans);
         deleteBookHelps(helpsBeans);
     }
 
-    private void disposeBookReviews(){
+    private void disposeBookReviews() {
         BookReviewBeanDao reviewDao = mSession.getBookReviewBeanDao();
         int count = (int) reviewDao.count();
         List<BookReviewBean> reviewBeans = reviewDao
@@ -377,7 +371,7 @@ public class LocalRepository implements SaveDbHelper,GetDbHelper,DeleteDbHelper{
                 .list();
         List<ReviewBookBean> bookBeans = new ArrayList<>(reviewBeans.size());
         List<BookHelpfulBean> helpfulBeans = new ArrayList<>(reviewBeans.size());
-        for (BookReviewBean reviewBean : reviewBeans){
+        for (BookReviewBean reviewBean : reviewBeans) {
             bookBeans.add(reviewBean.getBookBean());
             helpfulBeans.add(reviewBean.getHelpfulBean());
         }
