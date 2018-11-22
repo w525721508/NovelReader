@@ -13,10 +13,7 @@
     <style name="AppTheme" parent="BaseAppTheme"/>
     
     <!--Splash-->
-    <style name="SplashTheme" parent="AppTheme">
-        <item name="android:background">@color/transparent</item>
-    </style>
-    
+
     <!--Dialog-->
     <style name="CommonDialog" parent="@style/Theme.AppCompat.Light.Dialog">
         <item name="android:windowNoTitle">true</item>
@@ -44,12 +41,7 @@
         <item name="android:windowEnterAnimation">@anim/slide_left_in</item>
         <item name="android:windowExitAnimation">@anim/slide_right_out</item>
     </style>
-    
-    <style name="anim_slide_right_in_left_out" parent="android:Animation.Dialog">
-        <item name="android:windowExitAnimation">@anim/slide_right_out</item>
-        <item name="android:windowEnterAnimation">@anim/slide_left_in</item>
-    </style>
-    
+
     <!--Toolbar-->
     <style name="Theme.ToolBar.Menu" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <!-- 设置-弹窗的背景-颜色-->
@@ -85,56 +77,16 @@
     
     <!--Common-->
     <style name="NB.Theme" parent="AppTheme"/>
-    
-    
-    <style name="NB.Theme.Linear"/>
-    
-    <style name="NB.Theme.Linear.Weight" parent="NB.Theme.Linear">
-        <item name="android:layout_weight">1</item>
-    </style>
-    
-    <style name="NB.Theme.Linear.Weight.Wrap_Width" parent="NB.Theme.Linear.Weight">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">0dp</item>
-    </style>
-    
-    <style name="NB.Theme.Linear.Weight.Wrap_Height" parent="NB.Theme.Linear.Weight">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-    <style name="NB.Theme.Linear.Weight.Match_Width" parent="NB.Theme.Linear.Weight">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0dp</item>
-    </style>
-    
-    <style name="NB.Theme.Linear.Weight.Match_Height" parent="NB.Theme.Linear.Weight">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">match_parent</item>
-    </style>
-    
+
+
     <!-- Widget:修改View的样式的-->
-    <style name="NB.Theme.Widget"/>
 
     <!--ExpandListView-->
-    <style name="NB.Theme.Widget.DefaultExpandListView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:childDivider">@drawable/shape_divider_dash</item>
-        <item name="android:groupIndicator">@null</item>
-        <item name="android:listSelector">@drawable/selector_common_bg</item>
-    </style>
-    
+
     <!--图片-->
-    <style name="NB.Theme.Widget.ImageView"/>
-    
+
     <!--书籍的显示封面-->
-    <style name="NB.Theme.Widget.ImageView.Book">
-        <item name="android:layout_width">@dimen/nb.book.cover.width</item>
-        <item name="android:layout_height">@dimen/nb.book.cover.height</item>
-        <item name="android:src">@drawable/ic_book_loading</item>
-        <item name="android:scaleType">centerCrop</item>
-    </style>
-    
+
     <!-- TextAppearance:修改 -->
     <style name="NB.Theme.TextAppearance"/>
 </resources>

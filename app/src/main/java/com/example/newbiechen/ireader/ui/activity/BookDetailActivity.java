@@ -66,18 +66,6 @@ public class BookDetailActivity extends BaseMVPActivity<BookDetailContract.Prese
     TextView mTvDayWordCount;
     @BindView(R.id.book_detail_tv_brief)
     TextView mTvBrief;
-    @BindView(R.id.book_detail_tv_more_comment)
-    TextView mTvMoreComment;
-    @BindView(R.id.book_detail_rv_hot_comment)
-    RecyclerView mRvHotComment;
-    @BindView(R.id.book_detail_rv_community)
-    RelativeLayout mRvCommunity;
-    @BindView(R.id.book_detail_tv_community)
-    TextView mTvCommunity;
-    @BindView(R.id.book_detail_tv_posts_count)
-    TextView mTvPostsCount;
-    @BindView(R.id.book_list_tv_recommend_book_list)
-    TextView mTvRecommendBookList;
     @BindView(R.id.book_detail_rv_recommend_book_list)
     RecyclerView mRvRecommendBookList;
 
@@ -216,10 +204,6 @@ public class BookDetailActivity extends BaseMVPActivity<BookDetailContract.Prese
         mTvDayWordCount.setText(bean.getSerializeWordCount() + "");
         //简介
         mTvBrief.setText(bean.getLongIntro());
-        //社区
-        mTvCommunity.setText(getResources().getString(R.string.nb_book_detail_community, bean.getTitle()));
-        //帖子数
-        mTvPostsCount.setText(getResources().getString(R.string.nb_book_detail_posts_count, bean.getPostCount()));
         mCollBookBean = BookRepository.getInstance().getCollBook(bean.get_id());
 
         //判断是否收藏
