@@ -31,21 +31,6 @@ public class SearchPresenter extends RxPresenter<SearchContract.View>
         addDisposable(disp);
     }
 
-    @Override
-    public void searchKeyWord(String query) {
-        Disposable disp = RemoteRepository.getInstance()
-                .getKeyWords(query)
-                .compose(RxUtils::toSimpleSingle)
-                .subscribe(
-                        bean -> {
-                            mView.finishKeyWords(bean);
-                        },
-                        e -> {
-                            LogUtils.e(e);
-                        }
-                );
-        addDisposable(disp);
-    }
 
     @Override
     public void searchBook(String query) {

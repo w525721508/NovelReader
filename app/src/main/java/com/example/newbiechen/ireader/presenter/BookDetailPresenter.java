@@ -96,26 +96,26 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View>
     }
 
     private void refreshComment(){
-        Disposable disposable = RemoteRepository
-                .getInstance()
-                .getHotComments(bookId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        (value) -> mView.finishHotComment(value)
-                );
-        addDisposable(disposable);
+//        Disposable disposable = RemoteRepository
+//                .getInstance()
+//                .getHotComments(bookId)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(
+//                        (value) -> mView.finishHotComment(value)
+//                );
+//        addDisposable(disposable);
     }
 
     private void refreshRecommend(){
-        Disposable disposable = RemoteRepository
-                .getInstance()
-                .getRecommendBookList(bookId,3)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        (value) -> mView.finishRecommendBookList(value)
-                );
-        addDisposable(disposable);
+//        Disposable disposable = RemoteRepository
+//                .getInstance()
+//                .getRecommendBookList(bookId,3)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(
+//                        (value) -> mView.finishRecommendBookList(value)
+//                );
+//        addDisposable(disposable);
     }
 }

@@ -33,7 +33,7 @@ import me.gujun.android.taggroup.TagGroup;
  */
 
 public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
-        implements SearchContract.View{
+        implements SearchContract.View {
     private static final String TAG = "SearchActivity";
     private static final int TAG_LIMIT = 8;
 
@@ -49,8 +49,8 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
     TextView mTvRefreshHot;
     @BindView(R.id.search_tg_hot)
     TagGroup mTgHot;
-/*    @BindView(R.id.search_rv_history)
-    RecyclerView mRvHistory;*/
+    /*    @BindView(R.id.search_rv_history)
+        RecyclerView mRvHistory;*/
     @BindView(R.id.refresh_layout)
     RefreshLayout mRlRefresh;
     @BindView(R.id.refresh_rv_content)
@@ -77,10 +77,10 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
     protected void initWidget() {
         super.initWidget();
         setUpAdapter();
-        mRlRefresh.setBackground(ContextCompat.getDrawable(this,R.color.white));
+        mRlRefresh.setBackground(ContextCompat.getDrawable(this, R.color.white));
     }
 
-    private void setUpAdapter(){
+    private void setUpAdapter() {
         mKeyWordAdapter = new KeyWordAdapter();
         mSearchAdapter = new SearchBookAdapter();
 
@@ -106,9 +106,9 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().trim().equals("")){
+                if (s.toString().trim().equals("")) {
                     //隐藏delete按钮和关键字显示内容
-                    if (mIvDelete.getVisibility() == View.VISIBLE){
+                    if (mIvDelete.getVisibility() == View.VISIBLE) {
                         mIvDelete.setVisibility(View.INVISIBLE);
                         mRlRefresh.setVisibility(View.INVISIBLE);
                         //删除全部视图
@@ -119,7 +119,7 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
                     return;
                 }
                 //显示delete按钮
-                if (mIvDelete.getVisibility() == View.INVISIBLE){
+                if (mIvDelete.getVisibility() == View.INVISIBLE) {
                     mIvDelete.setVisibility(View.VISIBLE);
                     mRlRefresh.setVisibility(View.VISIBLE);
                     //默认是显示完成状态
@@ -127,14 +127,11 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
                 }
                 //搜索
                 String query = s.toString().trim();
-                if (isTag){
+                if (isTag) {
                     mRlRefresh.showLoading();
                     mPresenter.searchBook(query);
                     isTag = false;
-                }
-                else {
-                    //传递
-                    mPresenter.searchKeyWord(query);
+                } else {
                 }
             }
 
@@ -149,7 +146,7 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 //修改回车键功能
-                if(keyCode==KeyEvent.KEYCODE_ENTER) {
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
                     searchBook();
                     return true;
                 }
@@ -164,7 +161,7 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
 
         //删除字
         mIvDelete.setOnClickListener(
-                (v) ->  {
+                (v) -> {
                     mEtInput.setText("");
                     toggleKeyboard();
                 }
@@ -198,14 +195,14 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
         mSearchAdapter.setOnItemClickListener(
                 (view, pos) -> {
                     String bookId = mSearchAdapter.getItem(pos).get_id();
-                    BookDetailActivity.startActivity(this,bookId);
+                    BookDetailActivity.startActivity(this, bookId);
                 }
         );
     }
 
-    private void searchBook(){
+    private void searchBook() {
         String query = mEtInput.getText().toString().trim();
-        if(!query.equals("")){
+        if (!query.equals("")) {
             mRlRefresh.setVisibility(View.VISIBLE);
             mRlRefresh.showLoading();
             mPresenter.searchBook(query);
@@ -215,7 +212,7 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
         }
     }
 
-    private void toggleKeyboard(){
+    private void toggleKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
     }
@@ -244,9 +241,9 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
         refreshTag();
     }
 
-    private void refreshTag(){
+    private void refreshTag() {
         int last = mTagStart + TAG_LIMIT;
-        if (mHotTagList.size() <= last){
+        if (mHotTagList.size() <= last) {
             mTagStart = 0;
             last = TAG_LIMIT;
         }
@@ -259,7 +256,7 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
     public void finishKeyWords(List<String> keyWords) {
         if (keyWords.size() == 0) mRlRefresh.setVisibility(View.INVISIBLE);
         mKeyWordAdapter.refreshItems(keyWords);
-        if (!(mRvSearch.getAdapter() instanceof KeyWordAdapter)){
+        if (!(mRvSearch.getAdapter() instanceof KeyWordAdapter)) {
             mRvSearch.setAdapter(mKeyWordAdapter);
         }
     }
@@ -267,15 +264,14 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
     @Override
     public void finishBooks(List<SearchBookPackage.BooksBean> books) {
         mSearchAdapter.refreshItems(books);
-        if (books.size() == 0){
+        if (books.size() == 0) {
             mRlRefresh.showEmpty();
-        }
-        else {
+        } else {
             //显示完成
             mRlRefresh.showFinish();
         }
         //加载
-        if (!(mRvSearch.getAdapter() instanceof SearchBookAdapter)){
+        if (!(mRvSearch.getAdapter() instanceof SearchBookAdapter)) {
             mRvSearch.setAdapter(mSearchAdapter);
         }
     }
@@ -287,10 +283,9 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
 
     @Override
     public void onBackPressed() {
-        if (mRlRefresh.getVisibility() == View.VISIBLE){
+        if (mRlRefresh.getVisibility() == View.VISIBLE) {
             mEtInput.setText("");
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
     }
