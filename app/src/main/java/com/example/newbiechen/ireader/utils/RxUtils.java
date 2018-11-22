@@ -1,7 +1,5 @@
 package com.example.newbiechen.ireader.utils;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.Single;
 import io.reactivex.SingleSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -18,19 +16,5 @@ public class RxUtils {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static <T> ObservableSource<T> toSimpleSingle(Observable<T> upstream) {
-        return upstream.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
 
-
-    public static class TwoTuple<A, B> {
-        public final A first;
-        public final B second;
-
-        public TwoTuple(A a, B b) {
-            this.first = a;
-            this.second = b;
-        }
-    }
 }

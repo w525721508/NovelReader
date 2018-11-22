@@ -1,16 +1,10 @@
 package com.example.newbiechen.ireader.ui.base;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-
 /**
  * Created by newbiechen on 17-4-25.
  */
 
-public abstract class BaseMVPActivity<T extends BaseContract.BasePresenter> extends BaseActivity{
+public abstract class BaseMVPActivity<T extends BaseContract.BasePresenter> extends BaseActivity {
 
     protected T mPresenter;
 
@@ -21,7 +15,7 @@ public abstract class BaseMVPActivity<T extends BaseContract.BasePresenter> exte
         attachView(bindPresenter());
     }
 
-    private void attachView(T presenter){
+    private void attachView(T presenter) {
         mPresenter = presenter;
         mPresenter.attachView(this);
     }

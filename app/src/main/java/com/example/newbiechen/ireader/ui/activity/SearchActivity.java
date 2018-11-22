@@ -235,11 +235,6 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
 
     }
 
-    @Override
-    public void finishHotWords(List<String> hotWords) {
-        mHotTagList = hotWords;
-        refreshTag();
-    }
 
     private void refreshTag() {
         int last = mTagStart + TAG_LIMIT;
@@ -252,14 +247,6 @@ public class SearchActivity extends BaseMVPActivity<SearchContract.Presenter>
         mTagStart += TAG_LIMIT;
     }
 
-    @Override
-    public void finishKeyWords(List<String> keyWords) {
-        if (keyWords.size() == 0) mRlRefresh.setVisibility(View.INVISIBLE);
-        mKeyWordAdapter.refreshItems(keyWords);
-        if (!(mRvSearch.getAdapter() instanceof KeyWordAdapter)) {
-            mRvSearch.setAdapter(mKeyWordAdapter);
-        }
-    }
 
     @Override
     public void finishBooks(List<SearchBookPackage.BooksBean> books) {

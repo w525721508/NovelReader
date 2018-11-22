@@ -12,9 +12,9 @@ import android.widget.FrameLayout;
 public class LoadMoreDelegate implements WholeAdapter.ItemView {
     private LoadMoreView mLoadMoreView;
 
-    public LoadMoreDelegate(Context context, WholeAdapter.Options options){
+    public LoadMoreDelegate(Context context, WholeAdapter.Options options) {
         LoadMoreView view = new LoadMoreView(context,
-                options.loadMoreId,options.errorId,options.noMoreId);
+                options.loadMoreId, options.errorId, options.noMoreId);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
@@ -33,11 +33,8 @@ public class LoadMoreDelegate implements WholeAdapter.ItemView {
         loadMoreView.refreshView();
     }
 
-    public void setLoadMoreStatus(int status){
+    public void setLoadMoreStatus(int status) {
         mLoadMoreView.setLoadMoreStatus(status);
     }
 
-    public void setOnLoadMoreListener(LoadMoreView.OnLoadMoreListener listener){
-        mLoadMoreView.setOnLoadMoreListener(listener);
-    }
 }

@@ -1,7 +1,5 @@
 package com.example.newbiechen.ireader.ui.base;
 
-import org.reactivestreams.Subscription;
-
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 

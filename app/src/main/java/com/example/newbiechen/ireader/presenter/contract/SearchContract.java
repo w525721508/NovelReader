@@ -12,9 +12,6 @@ import java.util.List;
 public interface SearchContract extends BaseContract {
 
     interface View extends BaseView {
-        void finishHotWords(List<String> hotWords);
-
-        void finishKeyWords(List<String> keyWords);
 
         void finishBooks(List<SearchBookPackage.BooksBean> books);
 

@@ -1,25 +1,22 @@
 package com.example.newbiechen.ireader.model.bean;
 
-import android.util.Log;
+import com.example.newbiechen.ireader.model.gen.BookChapterBeanDao;
+import com.example.newbiechen.ireader.model.gen.DaoSession;
+import com.example.newbiechen.ireader.model.gen.DownloadTaskBeanDao;
 
+import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.ToMany;
 
 import java.util.List;
-import java.util.function.Consumer;
-
-import org.greenrobot.greendao.DaoException;
-import com.example.newbiechen.ireader.model.gen.DaoSession;
-import com.example.newbiechen.ireader.model.gen.BookChapterBeanDao;
-import com.example.newbiechen.ireader.model.gen.DownloadTaskBeanDao;
 
 /**
  * Created by newbiechen on 17-5-11.
  */
 @Entity
-public class DownloadTaskBean{
+public class DownloadTaskBean {
     public static final int STATUS_LOADING = 1;
     public static final int STATUS_WAIT = 2;
     public static final int STATUS_PAUSE = 3;
@@ -44,16 +41,20 @@ public class DownloadTaskBean{
     //总大小 -> (完成之后才会赋值)
     private long size = 0;
 
-    /** Used to resolve relations */
+    /**
+     * Used to resolve relations
+     */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
-    /** Used for active entity operations. */
+    /**
+     * Used for active entity operations.
+     */
     @Generated(hash = 1584592296)
     private transient DownloadTaskBeanDao myDao;
 
     @Generated(hash = 597395122)
     public DownloadTaskBean(String taskName, String bookId, int currentChapter, int lastChapter,
-            int status, long size) {
+                            int status, long size) {
         this.taskName = taskName;
         this.bookId = bookId;
         this.currentChapter = currentChapter;
@@ -80,8 +81,8 @@ public class DownloadTaskBean{
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
-        if (bookChapterList!=null){
-            for (BookChapterBean bean : bookChapterList){
+        if (bookChapterList != null) {
+            for (BookChapterBean bean : bookChapterList) {
                 bean.setTaskName(getTaskName());
             }
         }
@@ -112,20 +113,18 @@ public class DownloadTaskBean{
 
     /**
      * 这才是真正的列表使用类。
-     *
      */
-    public void setBookChapters(List<BookChapterBean> beans){
+    public void setBookChapters(List<BookChapterBean> beans) {
         bookChapterList = beans;
-        for (BookChapterBean bean : bookChapterList){
+        for (BookChapterBean bean : bookChapterList) {
             bean.setTaskName(getTaskName());
         }
     }
 
-    public List<BookChapterBean> getBookChapters(){
-        if (daoSession == null){
+    public List<BookChapterBean> getBookChapters() {
+        if (daoSession == null) {
             return bookChapterList;
-        }
-        else {
+        } else {
             return getBookChapterList();
         }
     }
@@ -151,7 +150,7 @@ public class DownloadTaskBean{
         return status;
     }
 
-    public void setStatus(int status){
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -163,7 +162,9 @@ public class DownloadTaskBean{
         this.size = size;
     }
 
-    /** Resets a to-many relationship, making the next get call to query for a fresh result. */
+    /**
+     * Resets a to-many relationship, making the next get call to query for a fresh result.
+     */
     @Generated(hash = 1077762221)
     public synchronized void resetBookChapterList() {
         bookChapterList = null;
@@ -205,7 +206,9 @@ public class DownloadTaskBean{
         myDao.update(this);
     }
 
-    /** called by internal mechanisms, do not call yourself. */
+    /**
+     * called by internal mechanisms, do not call yourself.
+     */
     @Generated(hash = 1923117869)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;

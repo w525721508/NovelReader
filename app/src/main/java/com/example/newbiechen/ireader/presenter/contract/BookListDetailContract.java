@@ -14,6 +14,5 @@ public interface BookListDetailContract {
     }
 
     interface Presenter extends BaseContract.BasePresenter<View>{
-        void refreshBookListDetail(String detailId);
     }
 }

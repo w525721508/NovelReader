@@ -13,6 +13,4 @@ public interface GetDbHelper {
 
     AuthorBean getAuthor(String id);
 
-    /******************************/
-    List<DownloadTaskBean> getDownloadTaskList();
 }

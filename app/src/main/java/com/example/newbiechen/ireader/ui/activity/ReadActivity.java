@@ -197,11 +197,6 @@ public class ReadActivity extends BaseMVPActivity<ReadContract.Presenter>
 
     private String mBookId;
 
-    public static void startActivity(Context context, CollBookBean collBook, boolean isCollected) {
-        context.startActivity(new Intent(context, ReadActivity.class)
-                .putExtra(EXTRA_IS_COLLECTED, isCollected)
-                .putExtra(EXTRA_COLL_BOOK, collBook));
-    }
 
     @Override
     protected int getContentId() {

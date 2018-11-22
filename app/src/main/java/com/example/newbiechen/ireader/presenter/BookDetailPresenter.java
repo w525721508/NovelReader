@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class BookDetailPresenter extends RxPresenter<BookDetailContract.View>
-        implements BookDetailContract.Presenter{
+        implements BookDetailContract.Presenter {
     private static final String TAG = "BookDetailPresenter";
     private String bookId;
 
@@ -30,13 +30,10 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View>
     public void refreshBookDetail(String bookId) {
         this.bookId = bookId;
         refreshBook();
-        refreshComment();
-        refreshRecommend();
-
     }
 
     @Override
-    public void addToBookShelf(CollBookBean collBookBean)  {
+    public void addToBookShelf(CollBookBean collBookBean) {
         Disposable disposable = RemoteRepository.getInstance()
                 .getBookChapters(collBookBean.get_id())
                 .subscribeOn(Schedulers.io())
@@ -49,7 +46,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View>
                         beans -> {
 
                             //设置 id
-                            for(BookChapterBean bean :beans){
+                            for (BookChapterBean bean : beans) {
                                 bean.setId(MD5Utils.strToMd5By16(bean.getLink()));
                             }
 
@@ -70,7 +67,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View>
         addDisposable(disposable);
     }
 
-    private void refreshBook(){
+    private void refreshBook() {
         RemoteRepository
                 .getInstance()
                 .getBookDetail(bookId)
@@ -83,7 +80,7 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View>
                     }
 
                     @Override
-                    public void onSuccess(BookDetailBean value){
+                    public void onSuccess(BookDetailBean value) {
                         mView.finishRefresh(value);
                         mView.complete();
                     }
@@ -95,27 +92,5 @@ public class BookDetailPresenter extends RxPresenter<BookDetailContract.View>
                 });
     }
 
-    private void refreshComment(){
-//        Disposable disposable = RemoteRepository
-//                .getInstance()
-//                .getHotComments(bookId)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                        (value) -> mView.finishHotComment(value)
-//                );
-//        addDisposable(disposable);
-    }
 
-    private void refreshRecommend(){
-//        Disposable disposable = RemoteRepository
-//                .getInstance()
-//                .getRecommendBookList(bookId,3)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(
-//                        (value) -> mView.finishRecommendBookList(value)
-//                );
-//        addDisposable(disposable);
-    }
 }

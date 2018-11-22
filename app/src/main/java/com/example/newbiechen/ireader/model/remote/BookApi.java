@@ -38,13 +38,6 @@ public interface BookApi {
     @GET("http://chapter2.zhuishushenqi.com/chapter/{url}")
     Single<ChapterInfoPackage> getChapterInfoPackage(@Path("url") String url);
 
-    /**
-     * 获取主题书单标签列表
-     *
-     * @return
-     */
-    @GET("/book-list/tagType")
-    Single<BookTagPackage> getBookTagPackage();
 
     /**
      * 获取书单详情

@@ -1,7 +1,5 @@
 package com.example.newbiechen.ireader.model.bean;
 
-import java.util.List;
-
 /**
  * Created by newbiechen on 17-5-1.
  */

@@ -19,7 +19,6 @@ import com.example.newbiechen.ireader.model.bean.CollBookBean;
 import com.example.newbiechen.ireader.model.local.BookRepository;
 import com.example.newbiechen.ireader.presenter.BookDetailPresenter;
 import com.example.newbiechen.ireader.presenter.contract.BookDetailContract;
-import com.example.newbiechen.ireader.ui.adapter.BookListAdapter;
 import com.example.newbiechen.ireader.ui.base.BaseMVPActivity;
 import com.example.newbiechen.ireader.utils.Constant;
 import com.example.newbiechen.ireader.utils.StringUtils;
@@ -83,7 +82,6 @@ public class BookDetailActivity extends BaseMVPActivity<BookDetailContract.Prese
     RecyclerView mRvRecommendBookList;
 
     /************************************/
-    private BookListAdapter mBookListAdapter;
     private CollBookBean mCollBookBean;
     private ProgressDialog mProgressDialog;
     /*******************************************/
