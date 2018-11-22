@@ -17,18 +17,6 @@ public class SearchPresenter extends RxPresenter<SearchContract.View>
 
     @Override
     public void searchHotWord() {
-        Disposable disp = RemoteRepository.getInstance()
-                .getHotWords()
-                .compose(RxUtils::toSimpleSingle)
-                .subscribe(
-                        bean -> {
-                            mView.finishHotWords(bean);
-                        },
-                        e -> {
-                            LogUtils.e(e);
-                        }
-                );
-        addDisposable(disp);
     }
 
 

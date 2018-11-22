@@ -1,17 +1,11 @@
 package com.example.newbiechen.ireader.model.remote;
 
 import com.example.newbiechen.ireader.model.bean.BookDetailBean;
-import com.example.newbiechen.ireader.model.bean.packages.BillBookPackage;
-import com.example.newbiechen.ireader.model.bean.packages.BillboardPackage;
 import com.example.newbiechen.ireader.model.bean.packages.BookChapterPackage;
 import com.example.newbiechen.ireader.model.bean.packages.BookListDetailPackage;
 import com.example.newbiechen.ireader.model.bean.packages.BookListPackage;
 import com.example.newbiechen.ireader.model.bean.packages.BookTagPackage;
 import com.example.newbiechen.ireader.model.bean.packages.ChapterInfoPackage;
-import com.example.newbiechen.ireader.model.bean.packages.CommentsPackage;
-import com.example.newbiechen.ireader.model.bean.packages.HotCommentPackage;
-import com.example.newbiechen.ireader.model.bean.packages.HotWordPackage;
-import com.example.newbiechen.ireader.model.bean.packages.RecommendBookListPackage;
 import com.example.newbiechen.ireader.model.bean.packages.SearchBookPackage;
 
 import io.reactivex.Single;
@@ -73,8 +67,6 @@ public interface BookApi {
 
 
     /************************************搜索书籍******************************************************/
-    @GET("/book/hot-word")
-    Single<HotWordPackage> getHotWordPackage();
 
 
     /**

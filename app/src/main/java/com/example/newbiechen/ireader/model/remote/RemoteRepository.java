@@ -2,25 +2,8 @@ package com.example.newbiechen.ireader.model.remote;
 
 import com.example.newbiechen.ireader.model.bean.BookChapterBean;
 import com.example.newbiechen.ireader.model.bean.BookDetailBean;
-import com.example.newbiechen.ireader.model.bean.ChapterInfoBean;
-import com.example.newbiechen.ireader.model.bean.CollBookBean;
-import com.example.newbiechen.ireader.model.bean.packages.BillboardPackage;
-import com.example.newbiechen.ireader.model.bean.BillBookBean;
-import com.example.newbiechen.ireader.model.bean.BookHelpsBean;
-import com.example.newbiechen.ireader.model.bean.BookListBean;
 import com.example.newbiechen.ireader.model.bean.BookListDetailBean;
-import com.example.newbiechen.ireader.model.bean.BookReviewBean;
-import com.example.newbiechen.ireader.model.bean.BookCommentBean;
-import com.example.newbiechen.ireader.model.bean.packages.BookSortPackage;
-import com.example.newbiechen.ireader.model.bean.packages.BookSubSortPackage;
-import com.example.newbiechen.ireader.model.bean.BookTagBean;
-import com.example.newbiechen.ireader.model.bean.CommentBean;
-import com.example.newbiechen.ireader.model.bean.CommentDetailBean;
-import com.example.newbiechen.ireader.model.bean.HelpsDetailBean;
-import com.example.newbiechen.ireader.model.bean.HotCommentBean;
-import com.example.newbiechen.ireader.model.bean.ReviewDetailBean;
-import com.example.newbiechen.ireader.model.bean.SortBookBean;
-import com.example.newbiechen.ireader.model.bean.packages.ChapterInfoPackage;
+import com.example.newbiechen.ireader.model.bean.ChapterInfoBean;
 import com.example.newbiechen.ireader.model.bean.packages.SearchBookPackage;
 
 import java.util.ArrayList;
@@ -83,22 +66,8 @@ public class RemoteRepository {
     /***********************************************************************************/
 
 
-
-
-
-
     /***********************************书单*************************************/
 
-
-    /**
-     * 获取书单的标签|类型
-     *
-     * @return
-     */
-    public Single<List<BookTagBean>> getBookTags() {
-        return mBookApi.getBookTagPackage()
-                .map(bean -> bean.getData());
-    }
 
     /**
      * 获取书单的详情
@@ -117,15 +86,6 @@ public class RemoteRepository {
     }
 
     /********************************书籍搜索*********************************************/
-    /**
-     * 搜索热词
-     *
-     * @return
-     */
-    public Single<List<String>> getHotWords() {
-        return mBookApi.getHotWordPackage()
-                .map(bean -> bean.getHotWords());
-    }
 
 
     /**

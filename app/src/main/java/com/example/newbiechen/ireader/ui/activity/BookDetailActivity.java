@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,22 +15,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.newbiechen.ireader.R;
 import com.example.newbiechen.ireader.model.bean.BookDetailBean;
-import com.example.newbiechen.ireader.model.bean.BookListBean;
 import com.example.newbiechen.ireader.model.bean.CollBookBean;
-import com.example.newbiechen.ireader.model.bean.HotCommentBean;
 import com.example.newbiechen.ireader.model.local.BookRepository;
 import com.example.newbiechen.ireader.presenter.BookDetailPresenter;
 import com.example.newbiechen.ireader.presenter.contract.BookDetailContract;
 import com.example.newbiechen.ireader.ui.adapter.BookListAdapter;
-import com.example.newbiechen.ireader.ui.adapter.HotCommentAdapter;
 import com.example.newbiechen.ireader.ui.base.BaseMVPActivity;
 import com.example.newbiechen.ireader.utils.Constant;
 import com.example.newbiechen.ireader.utils.StringUtils;
 import com.example.newbiechen.ireader.utils.ToastUtils;
 import com.example.newbiechen.ireader.widget.RefreshLayout;
-import com.example.newbiechen.ireader.widget.itemdecoration.DividerItemDecoration;
-
-import java.util.List;
 
 import butterknife.BindView;
 
@@ -91,7 +83,6 @@ public class BookDetailActivity extends BaseMVPActivity<BookDetailContract.Prese
     RecyclerView mRvRecommendBookList;
 
     /************************************/
-    private HotCommentAdapter mHotCommentAdapter;
     private BookListAdapter mBookListAdapter;
     private CollBookBean mCollBookBean;
     private ProgressDialog mProgressDialog;
@@ -250,43 +241,6 @@ public class BookDetailActivity extends BaseMVPActivity<BookDetailContract.Prese
         }
     }
 
-    @Override
-    public void finishHotComment(List<HotCommentBean> beans) {
-        if (beans.isEmpty()) {
-            return;
-        }
-        mHotCommentAdapter = new HotCommentAdapter();
-        mRvHotComment.setLayoutManager(new LinearLayoutManager(this) {
-            @Override
-            public boolean canScrollVertically() {
-                //与外部ScrollView滑动冲突
-                return false;
-            }
-        });
-        mRvHotComment.addItemDecoration(new DividerItemDecoration(this));
-        mRvHotComment.setAdapter(mHotCommentAdapter);
-        mHotCommentAdapter.addItems(beans);
-    }
-
-    @Override
-    public void finishRecommendBookList(List<BookListBean> beans) {
-        if (beans.isEmpty()) {
-            mTvRecommendBookList.setVisibility(View.GONE);
-            return;
-        }
-        //推荐书单列表
-        mBookListAdapter = new BookListAdapter();
-        mRvRecommendBookList.setLayoutManager(new LinearLayoutManager(this) {
-            @Override
-            public boolean canScrollVertically() {
-                //与外部ScrollView滑动冲突
-                return false;
-            }
-        });
-        mRvRecommendBookList.addItemDecoration(new DividerItemDecoration(this));
-        mRvRecommendBookList.setAdapter(mBookListAdapter);
-        mBookListAdapter.addItems(beans);
-    }
 
     @Override
     public void waitToBookShelf() {
@@ -347,7 +301,8 @@ public class BookDetailActivity extends BaseMVPActivity<BookDetailContract.Prese
                 Drawable drawable = getResources().getDrawable(R.drawable.shape_common_gray_corner);
                 mTvChase.setBackground(drawable);
                 //设置图片
-                mTvChase.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable.ic_book_list_delete), null,
+                mTvChase.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(this, R.drawable
+                                .ic_book_list_delete), null,
                         null, null);
                 mTvRead.setText("继续阅读");
             }
