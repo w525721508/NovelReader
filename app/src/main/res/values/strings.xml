@@ -1,16 +1,12 @@
 <resources>
     <string name="app_name">IReader</string>
 
-
     <!--book:书籍的信息-->
     <string name="nb.book.word">|&#160;%1$d&#160;万字</string>
-
     <!--book_detail : -->
     <string name="nb.book_detail.chase_update">追更</string>
     <string name="nb.book_detail.give_up">放弃</string>
     <string name="nb.book_detail.start_read">开始阅读</string>
-    
-    <!--DownloadTask:书籍下载-->
 
     <!--mode-->
     <string name="nb.mode.night">夜间</string>
@@ -22,12 +18,8 @@
     '
     <string name="nb.read.category">目录</string>
 
-    <!--file system-->
-
     <!--search-->
     <string name="nb.search.book.brief">%1$d人在追 | %2$s读者留存 | %3$s著</string>
-
-    <!--BookShelf-->
 
     <!--OpenCC-->
     <string-array name="conversion_type_array">

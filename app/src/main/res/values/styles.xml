@@ -78,15 +78,9 @@
     <!--Common-->
     <style name="NB.Theme" parent="AppTheme"/>
 
-
-    <!-- Widget:修改View的样式的-->
-
-    <!--ExpandListView-->
-
-    <!--图片-->
-
-    <!--书籍的显示封面-->
-
     <!-- TextAppearance:修改 -->
     <style name="NB.Theme.TextAppearance"/>
+
+
+
 </resources>

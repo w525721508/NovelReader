@@ -1,12 +1,4 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-
-    <!-- Common -->
-<!--    <dimen name="nb.divider.line">1px</dimen>
-    <dimen name="nb.divider.small">4dp</dimen>
-    <dimen name="nb.divider.normal">8dp</dimen>
-    <dimen name="nb.divider.large">16dp</dimen>
-    <dimen name="nb.divider.xlarge">24dp</dimen>-->
 
     <dimen name="nb.padding.normal">8dp</dimen>
     <dimen name="nb.padding.large">16dp</dimen>
@@ -14,18 +6,10 @@
     <!---->
     <dimen name="nb.divider.line">0.5dp</dimen>
     '
-    <!--text-->
-    <!--二级标题-->
-
-    <!--小标签-->
-
-
-    <!--书籍的封面-->
-
     <!--read-->
     <dimen name="nb.read.text.top">16sp</dimen>
     <dimen name="nb.read.text.bottom">12dp</dimen>
-    
+
     <!--read setting-->
     <dimen name="nb.read_setting.divider">20dp</dimen>
     <dimen name="nb.read_setting.btn_height">35dp</dimen>

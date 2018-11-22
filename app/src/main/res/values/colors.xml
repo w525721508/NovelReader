@@ -18,7 +18,6 @@
     <color name="light_red">#EC4A48</color>
     <color name="light_translucent">#23000000</color>
     <color name="common_gray">#EEEEEE</color>
-    
     <!--list-->
     <color name="nb.divider.common">#727272</color>
     <color name="nb.divider.dash">@color/light_white</color>
@@ -26,27 +25,20 @@
     <color name="nb.divider.narrow">#E3E3E3</color>
     <!--通用分割线粗-->
     <color name="nb.divider.wide">@color/light_white</color>
-    
-    
-    <!--text-->
 
     <color name="nb.text.default">@color/black</color>
-    <!--通用一级标题的颜色-->
     <!--通用二级标题的颜色-->
     <color name="nb.text.common_h2">#727272</color>
-    <!--通用三级标题的颜色-->
 
     <!--button-->
     <color name="nb.widget.button.normal">@color/white</color>
     <color name="nb.widget.button.selected">#E3E3E3</color>
 
-    <!--性别选择颜色值-->
 
     <!---->
     <color name="nb.popup.text.selected">@color/light_pink</color>
     <!---->
     <color name="nb.scroll_refresh.tip">#88303F9F</color>
-    <!--downlaod-->
 
     <!--read-->
     <color name="nb.read.bg_1">#CEC29C</color>
@@ -61,10 +53,10 @@
     <color name="nb.read.font_3">#92918C</color>
     <color name="nb.read.font_4">#383429</color>
     <color name="nb.read.font_5">#627176</color>
-    
+
     <color name="nb.read.bg.night">#000000</color>
     <color name="nb.read.font_night">#99ffffff</color>
-    
+
     <color name="nb.read.menu.bg">#191919</color>
     <color name="nb.read.menu.text">#CBCBCB</color>
 </resources>
